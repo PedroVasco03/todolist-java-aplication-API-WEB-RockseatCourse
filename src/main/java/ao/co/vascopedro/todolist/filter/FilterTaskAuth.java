@@ -11,6 +11,7 @@ import ao.co.vascopedro.todolist.user.IUserRepository;
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -26,7 +27,7 @@ public class FilterTaskAuth  extends OncePerRequestFilter{
                 
                 var serveletPath = request.getServletPath();
                  
-                if(serveletPath.equals("/tasks")){
+                if(serveletPath.equals("/tasks/")){
                 // Pegar autenticacao (usuario, senha)
                     var authorization = request.getHeader("Authorization");
                     var authEncoded = authorization.substring("Basic".length()).trim();
@@ -52,7 +53,6 @@ public class FilterTaskAuth  extends OncePerRequestFilter{
                         }
                         // Seguir Viagem
     
-                        filterChain.doFilter(request, response);
                     }
                 }else{
                     filterChain.doFilter(request, response);
